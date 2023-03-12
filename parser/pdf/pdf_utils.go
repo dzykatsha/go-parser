@@ -2,7 +2,8 @@ package pdf
 
 import (
 	"fmt"
-	"github.com/ledongthuc/pdf"
+	
+	"github.com/dslipak/pdf"
 )
 
 func ValidatePdfArgs(params ...bool) error {

@@ -4,12 +4,11 @@ import (
 	"fmt"
 	"bytes"
 
-	"github.com/ledongthuc/pdf"
+	"github.com/dslipak/pdf"
 )
 
 func ReadPlainPdf(path string) (string, error) {
-	f, r, err := pdf.Open(path)
-    defer f.Close()
+	r, err := pdf.Open(path)
 	if err != nil {
 		return "", err
 	}
@@ -24,8 +23,7 @@ func ReadPlainPdf(path string) (string, error) {
 
 func ReadStyledPdf(path string) (string, error) {
 	parsed := ""
-	f, r, err := pdf.Open(path)
-	defer f.Close()
+	r, err := pdf.Open(path)
 	if err != nil {
 		return "", err
 	}
@@ -52,10 +50,7 @@ func ReadStyledPdf(path string) (string, error) {
 
 func ReadGroupedPdf(path string) (string, error) {
 	parsed := ""
-	f, r, err := pdf.Open(path)
-	defer func() {
-		_ = f.Close()
-	}()
+	r, err := pdf.Open(path)
 	if err != nil {
 		return "", err
 	}

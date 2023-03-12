@@ -3,7 +3,7 @@ module go-parser
 go 1.19
 
 require (
-	github.com/ledongthuc/pdf v0.0.0-20220302134840-0c2507a12d80
+	github.com/dslipak/pdf v0.0.1
 	github.com/rs/zerolog v1.29.0
 	golang.org/x/net v0.8.0
 )
