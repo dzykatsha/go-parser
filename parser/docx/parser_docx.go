@@ -4,6 +4,7 @@ import (
 	"archive/zip"
 	"fmt"
 	"time"
+	"strings"
 )
 
 func ReadDocxFile(path string) (*zip.ReadCloser, error) {
@@ -71,5 +72,6 @@ func ParseDocx(reader *zip.ReadCloser) (string,  map[string]string, error) {
 		}
 
 	}
-	return textHeader + "\n" + textBody + "\n" + textFooter, metadata, nil
+	content := textHeader + "\n" + textBody + "\n" + textFooter
+	return strings.TrimSpace(content), metadata, nil
 }
