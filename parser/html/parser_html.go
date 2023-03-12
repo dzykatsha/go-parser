@@ -37,11 +37,14 @@ func ParseHtml(text string) []string {
             token := tokenizer.Token()
             if isList {
                 content = append(content, token.Data)
-            }
-            if isTable {
+            
+            } else if isTable {
                 text := (string)(token.Data)
                 trimmed := strings.TrimSpace(text)
                 content = append(content, trimmed)
+            } else if strings.TrimSpace(token.Data) != "" {
+                data := strings.Join(strings.Fields(token.Data), " ")
+                content = append(content, data)
             }
             isList = false
             isTable = false
