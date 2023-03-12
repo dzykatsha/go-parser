@@ -14,7 +14,7 @@ import (
 
 func main() {
 	var (
-		inputFile = flag.String("i", "input.html", "path to input file")
+		inputFile = flag.String("i", "", "path to input file")
 		outputFile = flag.String("o", "output.txt", "path to output file")
 		plain = flag.Bool("plain", false, "get plain text from PDF file (use only one of plain, styled or grouped)")
 		styled = flag.Bool("styled", false, "get all text with styles from PDF file (use only one of plain, styled or grouped)")
@@ -27,6 +27,10 @@ func main() {
 	docx, _ := regexp.MatchString(`.*\.docx$`, *inputFile)
 	pdf, _ := regexp.MatchString(`.*\.pdf$`, *inputFile)
 	djvu, _ := regexp.MatchString(`.*\.djvu$`, *inputFile)
+	
+	if *inputFile == "" {
+		log.Fatal().Msg("no input file")
+	}
 	
 	switch {
 	case html:
