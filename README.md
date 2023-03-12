@@ -18,3 +18,5 @@ If you need to retrieve text from `djvu`, check out command-line utility [DjVuLi
 3. Run container: `docker run --rm -it --name go-parser -v $PWD:/go/src/parser golang-parser`
 4. `cd src/parser` and `go run client.go --help` to discover command-line arguments
 
+### Manual test
+To make sure all is fine, run from terminal `test.sh dir_with_test_input dir_for_test_output`
