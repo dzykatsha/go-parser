@@ -2,7 +2,7 @@ package pdf
 
 import (
 	"fmt"
-	
+
 	"github.com/dslipak/pdf"
 )
 
@@ -26,5 +26,5 @@ func isSameSentence(t1, t2 pdf.Text) bool {
 	if t1.Y != t2.Y {
 		return false
 	}
- 	return true
+	return true
 }

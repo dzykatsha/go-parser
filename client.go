@@ -1,24 +1,24 @@
 package main
 
 import (
+	"flag"
+	"github.com/rs/zerolog/log"
 	"go-parser/parser"
-	html_parser "go-parser/parser/html"
+	djvu_parser "go-parser/parser/djvu"
 	doc_parser "go-parser/parser/doc"
 	docx_parser "go-parser/parser/docx"
+	html_parser "go-parser/parser/html"
 	pdf_parser "go-parser/parser/pdf"
-	djvu_parser "go-parser/parser/djvu"
-	"github.com/rs/zerolog/log"
 	"regexp"
-	"flag"
 )
 
 func main() {
 	var (
-		inputFile = flag.String("i", "", "path to input file")
+		inputFile  = flag.String("i", "", "path to input file")
 		outputFile = flag.String("o", "output.txt", "path to output file")
-		plain = flag.Bool("plain", false, "get plain text from PDF file (use only one of plain, styled or grouped)")
-		styled = flag.Bool("styled", false, "get all text with styles from PDF file (use only one of plain, styled or grouped)")
-		grouped = flag.Bool("grouped", false, "get text grouped by rows from PDF file (use only one of plain, styled or grouped)")
+		plain      = flag.Bool("plain", false, "get plain text from PDF file (use only one of plain, styled or grouped)")
+		styled     = flag.Bool("styled", false, "get all text with styles from PDF file (use only one of plain, styled or grouped)")
+		grouped    = flag.Bool("grouped", false, "get text grouped by rows from PDF file (use only one of plain, styled or grouped)")
 	)
 	flag.Parse()
 
@@ -27,11 +27,11 @@ func main() {
 	docx, _ := regexp.MatchString(`.*\.docx$`, *inputFile)
 	pdf, _ := regexp.MatchString(`.*\.pdf$`, *inputFile)
 	djvu, _ := regexp.MatchString(`.*\.djvu$`, *inputFile)
-	
+
 	if *inputFile == "" {
 		log.Fatal().Msg("no input file")
 	}
-	
+
 	switch {
 	case html:
 		text, err := html_parser.ReadHtmlFile(*inputFile)
@@ -88,7 +88,7 @@ func main() {
 		default:
 			log.Fatal().Msg("Unknown type of pdf parameter")
 		}
-		
+
 		err = parser.WriteContent(content, *outputFile)
 		if err != nil {
 			log.Fatal().Msgf("error from pdf parser: %s", err.Error())

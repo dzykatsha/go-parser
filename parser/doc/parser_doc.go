@@ -2,12 +2,11 @@ package doc
 
 import (
 	"fmt"
-	"os/exec"
 	"os"
-
+	"os/exec"
 )
 
-func ParseAndWriteDoc(inputPath string, outputPath string) error{
+func ParseAndWriteDoc(inputPath string, outputPath string) error {
 	if _, err := os.Stat(inputPath); err != nil {
 		return err
 	}
@@ -18,5 +17,5 @@ func ParseAndWriteDoc(inputPath string, outputPath string) error{
 		return err
 	}
 	return nil
-	
+
 }

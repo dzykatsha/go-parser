@@ -1,8 +1,8 @@
 package pdf
 
 import (
-	"fmt"
 	"bytes"
+	"fmt"
 
 	"github.com/dslipak/pdf"
 )
@@ -13,11 +13,11 @@ func ReadPlainPdf(path string) (string, error) {
 		return "", err
 	}
 	var buf bytes.Buffer
-    b, err := r.GetPlainText()
-    if err != nil {
-        return "", err
-    }
-    buf.ReadFrom(b)
+	b, err := r.GetPlainText()
+	if err != nil {
+		return "", err
+	}
+	buf.ReadFrom(b)
 	return buf.String(), nil
 }
 
@@ -65,9 +65,9 @@ func ReadGroupedPdf(path string) (string, error) {
 		rows, _ := p.GetTextByRow()
 		for _, row := range rows {
 			parsed += fmt.Sprintf(">>>> row: %v\n", row.Position)
-		    for _, word := range row.Content {
-		        parsed += fmt.Sprintf("%v\n",word.S)
-		    }
+			for _, word := range row.Content {
+				parsed += fmt.Sprintf("%v\n", word.S)
+			}
 		}
 	}
 	return parsed, nil

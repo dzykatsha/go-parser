@@ -2,10 +2,9 @@ package docx
 
 import (
 	"archive/zip"
-	"io"
 	"encoding/xml"
 	"fmt"
-
+	"io"
 )
 
 const maxBytes = 20 << 20

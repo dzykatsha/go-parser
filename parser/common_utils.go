@@ -1,10 +1,11 @@
 package parser
 
 import (
-	"os"
 	"fmt"
+	"os"
 )
-func WriteContent[T string|[]string](content T, output string) error {
+
+func WriteContent[T string | []string](content T, output string) error {
 	f, err := os.Create(output)
 	if err != nil {
 		return err

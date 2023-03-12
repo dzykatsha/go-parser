@@ -3,8 +3,8 @@ package docx
 import (
 	"archive/zip"
 	"fmt"
-	"time"
 	"strings"
+	"time"
 )
 
 func ReadDocxFile(path string) (*zip.ReadCloser, error) {
@@ -15,7 +15,7 @@ func ReadDocxFile(path string) (*zip.ReadCloser, error) {
 	return reader, nil
 }
 
-func ParseDocx(reader *zip.ReadCloser) (string,  map[string]string, error) {
+func ParseDocx(reader *zip.ReadCloser) (string, map[string]string, error) {
 	zipFiles := mapZipFiles(reader.File)
 
 	contentTypeDefinition, err := getContentTypeDefinition(zipFiles["[Content_Types].xml"])
