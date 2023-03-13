@@ -19,6 +19,7 @@ func ParseHtml(text string) []string {
 	tokenizer := html.NewTokenizer(strings.NewReader(text))
 	var (
 		content []string
+		links []string
 		isList  bool
 		isTable bool
 	)
@@ -27,6 +28,14 @@ func ParseHtml(text string) []string {
 
 		switch {
 		case tokenType == html.ErrorToken:
+			if len(content) > 0 {
+				content = removeEmptyStrings(content)
+			}
+			if len(links) > 0 {
+				content = append(content, "\n")
+				links = removeEmptyStrings(links)
+				content = append(content, links...)
+			}
 			return content
 
 		case tokenType == html.StartTagToken:
@@ -34,7 +43,7 @@ func ParseHtml(text string) []string {
 			isList = (token.Data == "li")
 			isTable = (token.Data == "td")
 			if token.Data == "a" {
-				content = append(content, xurls.Relaxed.FindString(token.String()))
+				links = append(links, xurls.Relaxed.FindString(token.String()))
 			}
 
 		case tokenType == html.TextToken:
@@ -55,4 +64,14 @@ func ParseHtml(text string) []string {
 		}
 	}
 
+}
+
+func removeEmptyStrings(s []string) []string {
+	var r []string
+	for _, str := range s {
+		if str != "\n" {
+			r = append(r, str)
+		}
+	}
+	return r
 }
