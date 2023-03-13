@@ -3,6 +3,7 @@ package html
 import (
 	"golang.org/x/net/html"
 	"io/ioutil"
+	"mvdan.cc/xurls"
 	"strings"
 )
 
@@ -32,6 +33,9 @@ func ParseHtml(text string) []string {
 			token := tokenizer.Token()
 			isList = (token.Data == "li")
 			isTable = (token.Data == "td")
+			if token.Data == "a" {
+				content = append(content, xurls.Relaxed.FindString(token.String()))
+			}
 
 		case tokenType == html.TextToken:
 			token := tokenizer.Token()
